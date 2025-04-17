@@ -1,56 +1,196 @@
-  * {
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
 
-  body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #a2d4ec, #ffffff);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .weather-container {
-    background-color: #ffffffdd;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-  }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 102, 204, 0.7)), 
+                  url('https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      color: #fff;
+    }
 
-  input {
-    padding: 10px;
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-  }
+    .main {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      backdrop-filter: blur(8px);
+      animation: slideIn 0.8s ease-out;
+    }
 
-  button {
-    padding: 10px 20px;
-    background-color: #1e90ff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    margin-left: 10px;
-    margin: 20px 0;
-    width: 100%;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
+    input {
+      padding: 14px;
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #0066cc;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9f9;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-  button:hover {
-    background-color: #0d6efd;
-  }
+    input:focus {
+      outline: none;
+      border-color: #003366;
+      box-shadow: 0 0 10px rgba(0, 51, 102, 0.3);
+    }
 
-  p {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
-  }
+    button {
+      padding: 14px;
+      width: 100%;
+      background: linear-gradient(135deg, #0066cc, #00ccff);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      margin: 20px 0;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+    }
+
+    p {
+      margin: 15px 0;
+      padding: 12px;
+      font-size: 18px;
+      color: #003366;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(200, 240, 255, 0.7));
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeIn 1s ease-in;
+    }
+
+    p:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 15px rgba(0, 51, 102, 0.3);
+    }
+
+    p::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.5);
+      z-index: 0;
+      opacity: 0.3;
+    }
+
+    p > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    p img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      z-index: 1;
+    }
+
+    #state {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 223, 186, 0.7));
+      font-weight: 600;
+      color: #003366;
+    }
+
+    #temperature {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 182, 193, 0.7));
+    }
+
+    #situation {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(173, 216, 230, 0.7));
+    }
+
+    #humidity {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(144, 238, 144, 0.7));
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main {
+        padding: 30px;
+        width: 95%;
+        max-width: 400px;
+      }
+
+      input, button {
+        font-size: 15px;
+        padding: 12px;
+      }
+
+      p {
+        font-size: 16px;
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main {
+        padding: 20px;
+        width: 95%;
+      }
+
+      input, button {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      p {
+        font-size: 14px;
+        margin: 10px 0;
+        padding: 8px;
+      }
+
+      p img {
+        width: 25px;
+        height: 25px;
+      }
+    }
