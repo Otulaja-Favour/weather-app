@@ -37,7 +37,7 @@ async function getWeather(city) {
           document.getElementById('current').innerHTML = `
          Latitude: ${position.coords.latitude} <br>
          Longitude: ${position.coords.longitude} <br>
-         Accuracy: ${position.coords.accuracy}meters
+         Accuracy: ${position.coords.accuracy} meters
           `
           console.log("Current Location:");
           console.log("Latitude:", position.coords.latitude);
