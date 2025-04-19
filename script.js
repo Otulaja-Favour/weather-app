@@ -24,4 +24,35 @@ async function getWeather(city) {
       getWeather(city);
     }
   });
+  document.getElementById('city').addEventListener('input', () => {
+    const city = document.getElementById('city').value.trim();
+    if (city) {
+      getWeather(city);
+    }
+  });
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          document.getElementById('current').innerHTML = `
+         Latitude: ${position.coords.latitude} <br>
+         Longitude: ${position.coords.longitude} <br>
+         Accuracy: ${position.coords.accuracy}meters
+          `
+          console.log("Current Location:");
+          console.log("Latitude:", position.coords.latitude);
+          console.log("Longitude:", position.coords.longitude);
+          console.log("Accuracy:", position.coords.accuracy, "meters");
+        },
+        (error) => {
+          console.error("Error getting location:", error.message);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }
+  
+  // Usage
+  getLocation();
   
