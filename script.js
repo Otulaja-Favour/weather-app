@@ -22,6 +22,7 @@ async function getWeather(city) {
     const city = document.getElementById('city').value.trim();
     if (city) {
       getWeather(city);
+document.getElementById('city').innerHTML = ''
     }
   });
   document.getElementById('city').addEventListener('input', () => {
@@ -56,3 +57,52 @@ async function getWeather(city) {
   // Usage
   getLocation();
   
+
+
+
+// Autocomplete city filter
+async function filterCities(query) {
+  document.getElementById('current').innerHTML = ''; // Clear previous suggestions
+  if (!query) return;
+
+  try {
+    
+      // Use OpenWeatherMap's geocoding API for city suggestions
+      const response = await fetch(
+          `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=1862a4c96c034e74f156c00ddb278294`
+      );
+      const cities = await response.json();
+      if (cities.length > 0) {
+          cities.forEach(city => {
+              const suggestion = document.createElement('div');
+              suggestion.textContent = `${city.name}, ${city.country}`;
+              suggestion.style.cursor = 'pointer';
+              suggestion.style.backgroundColor = 'white'
+              suggestion.style.color = 'black'
+              suggestion.style.padding = '5px';
+              suggestion.addEventListener('click', () => {
+                  document.getElementById('city').value = city.name;
+                   document.getElementById('current').innerHTML = ''; // Clear suggestions
+                  getWeather(city.name); // Fetch weather for selected city
+              });
+              document.getElementById('current').appendChild(suggestion);
+          });
+      }
+  } catch (error) {
+      console.error("Error fetching city suggestions:", error);
+  }
+}
+
+
+
+document.getElementById('city').addEventListener('input', (e) => {
+  const query = e.target.value.trim();
+  if (query) {
+      filterCities(query); // Show city suggestions
+  } else {
+      document.getElementById('suggestions').innerHTML = ''; // Clear suggestions
+  }
+});
+
+// Initialize
+getLocation();
